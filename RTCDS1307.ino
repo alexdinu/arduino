@@ -32,9 +32,9 @@ void ledFlash(int nrFlash)
  for (int i=0; i<=nrFlash; i++)
     {
      digitalWrite(ledPin, HIGH);
-     delay(500);
+     delay(250);
      digitalWrite(ledPin,LOW);
-     delay(500);
+     delay(250);
     }
 }
 void dateSet()
@@ -42,8 +42,8 @@ void dateSet()
    Wire.beginTransmission(RTCI2C);//se initiaza conexiunea I2C catre modul RTC gasit la adresa 0x68
    Wire.write(0x00); //selectam adresa registrului de memorie la care vom scrie data si ora
    Wire.write(0);
-   Wire.write(DECToBcd(20));
    Wire.write(DECToBcd(15));
+   Wire.write(DECToBcd(16));
    status = Wire.endTransmission();
    Serial.print("Operatia de pornire a ceasului si de setare a orei a returnat codul:");
    Serial.println(status);
@@ -53,7 +53,7 @@ void dateSet()
    Wire.write(0x04); //selectam adresa registrului de memorie la care vom scrie data si ora
    Wire.write(DECToBcd(22));
    Wire.write(DECToBcd(02));
-   Wire.write(DECToBcd(2013));
+   Wire.write(DECToBcd(13)); //pt an se introduc doar ultimele 2 cifre
    status=Wire.endTransmission();
    Serial.print("Operatia de setare a datei a returnat codul:");
    Serial.println(status);
